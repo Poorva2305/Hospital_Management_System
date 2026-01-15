@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Appointments - Hospital Management</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-hospital"></i>
+            <span>HealthCare HMS</span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="/"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="/patients"><i class="fas fa-users"></i> Patients</a></li>
+            <li><a href="/doctors"><i class="fas fa-user-md"></i> Doctors</a></li>
+            <li><a href="/appointments" class="active"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+
+        <div class="page-header">
+            <h1 class="page-title">Appointment Management</h1>
+            <button class="btn btn-primary" onclick="openModal('appointmentModal')">
+                <i class="fas fa-plus"></i> Book Appointment
+            </button>
+        </div>
+
+        <div class="table-container">
+            <table class="data-table">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Patient</th>
+                        <th>Doctor</th>
+                        <th>Specialization</th>
+                        <th>Date</th>
+                        <th>Time</th>
+                        <th>Status</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="appointmentsTableBody">
+                    <!-- Data loaded via JavaScript -->
+                </tbody>
+            </table>
+        </div>
+
+    </main>
+
+    <!-- Book Appointment Modal -->
+    <div id="appointmentModal" class="modal">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2>Book New Appointment</h2>
+                <span class="close" onclick="closeModal('appointmentModal')">&times;</span>
+            </div>
+
+            <form id="appointmentForm" onsubmit="addAppointment(event)">
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="patientSelect">Patient *</label>
+                        <select id="patientSelect" name="patient_id" required>
+                            <option value="">Select Patient</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="doctorSelect">Doctor *</label>
+                        <select id="doctorSelect" name="doctor_id" required>
+                            <option value="">Select Doctor</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appointmentDate">Date *</label>
+                        <input type="date" id="appointmentDate" name="appointment_date" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="appointmentTime">Time *</label>
+                        <input type="time" id="appointmentTime" name="appointment_time" required>
+                    </div>
+
+                    <div class="form-group full-width">
+                        <label for="reason">Reason for Visit</label>
+                        <textarea id="reason" name="reason" rows="3"></textarea>
+                    </div>
+
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('appointmentModal')">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Book Appointment
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadAppointments();
+            loadPatientsDropdown();
+            loadDoctorsDropdown();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hospital Management System</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-hospital"></i>
+            <span>HealthCare HMS</span>
+        </div>
+
+        <ul class="nav-links">
+            <li>
+                <a href="/" class="active">
+                    <i class="fas fa-home"></i> Dashboard
+                </a>
+            </li>
+            <li>
+                <a href="/patients">
+                    <i class="fas fa-users"></i> Patients
+                </a>
+            </li>
+            <li>
+                <a href="/doctors">
+                    <i class="fas fa-user-md"></i> Doctors
+                </a>
+            </li>
+            <li>
+                <a href="/appointments">
+                    <i class="fas fa-calendar-check"></i> Appointments
+                </a>
+            </li>
+        </ul>
+    </nav>
+
+    <main class="container">
+        <h1 class="page-title">Dashboard</h1>
+
+        <!-- Statistics Cards -->
+        <div class="stats-grid">
+
+            <div class="stat-card">
+                <div class="stat-icon patients">
+                    <i class="fas fa-users"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="totalPatients">0</h3>
+                    <p>Total Patients</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon doctors">
+                    <i class="fas fa-user-md"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="totalDoctors">0</h3>
+                    <p>Total Doctors</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon appointments">
+                    <i class="fas fa-calendar-check"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="pendingAppointments">0</h3>
+                    <p>Pending Appointments</p>
+                </div>
+            </div>
+
+            <div class="stat-card">
+                <div class="stat-icon today">
+                    <i class="fas fa-clock"></i>
+                </div>
+                <div class="stat-info">
+                    <h3 id="todayAppointments">0</h3>
+                    <p>Today's Appointments</p>
+                </div>
+            </div>
+
+        </div>
+
+        <!-- Quick Actions -->
+        <div class="quick-actions">
+            <h2>Quick Actions</h2>
+
+            <div class="action-buttons">
+                <a href="/patients" class="action-btn">
+                    <i class="fas fa-user-plus"></i>
+                    Add Patient
+                </a>
+
+                <a href="/doctors" class="action-btn">
+                    <i class="fas fa-user-md"></i>
+                    Add Doctor
+                </a>
+
+                <a href="/appointments" class="action-btn">
+                    <i class="fas fa-calendar-plus"></i>
+                    Book Appointment
+                </a>
+            </div>
+        </div>
+
+    </main>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDashboardStats();
+        });
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Doctors - Hospital Management</title>
+
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+<body>
+
+    <nav class="navbar">
+        <div class="nav-brand">
+            <i class="fas fa-hospital"></i>
+            <span>HealthCare HMS</span>
+        </div>
+
+        <ul class="nav-links">
+            <li><a href="/"><i class="fas fa-home"></i> Dashboard</a></li>
+            <li><a href="/patients"><i class="fas fa-users"></i> Patients</a></li>
+            <li><a href="/doctors" class="active"><i class="fas fa-user-md"></i> Doctors</a></li>
+            <li><a href="/appointments"><i class="fas fa-calendar-check"></i> Appointments</a></li>
+        </ul>
+    </nav>
+
+    <main class="container">
+
+        <div class="page-header">
+            <h1 class="page-title">Doctor Management</h1>
+            <button class="btn btn-primary" onclick="openModal('doctorModal')">
+                <i class="fas fa-plus"></i> Add Doctor
+            </button>
+        </div>
+
+        <div class="cards-grid" id="doctorsGrid">
+            <!-- Cards loaded via JavaScript -->
+        </div>
+
+    </main>
+
+    <!-- Add Doctor Modal -->
+    <div id="doctorModal" class="modal">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2>Add New Doctor</h2>
+                <span class="close" onclick="closeModal('doctorModal')">&times;</span>
+            </div>
+
+            <form id="doctorForm" onsubmit="addDoctor(event)">
+                <div class="form-grid">
+
+                    <div class="form-group">
+                        <label for="docFirstName">First Name *</label>
+                        <input type="text" id="docFirstName" name="first_name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="docLastName">Last Name *</label>
+                        <input type="text" id="docLastName" name="last_name" required>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="specialization">Specialization *</label>
+                        <select id="specialization" name="specialization" required>
+                            <option value="">Select</option>
+                            <option value="General Medicine">General Medicine</option>
+                            <option value="Cardiology">Cardiology</option>
+                            <option value="Dermatology">Dermatology</option>
+                            <option value="Neurology">Neurology</option>
+                            <option value="Orthopedics">Orthopedics</option>
+                            <option value="Pediatrics">Pediatrics</option>
+                            <option value="Psychiatry">Psychiatry</option>
+                            <option value="Gynecology">Gynecology</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="experience">Experience (Years)</label>
+                        <input type="number" id="experience" name="experience_years" min="0">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="docPhone">Phone</label>
+                        <input type="tel" id="docPhone" name="phone">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="docEmail">Email</label>
+                        <input type="email" id="docEmail" name="email">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="fee">Consultation Fee (₹)</label>
+                        <input type="number" id="fee" name="consultation_fee" min="0" step="0.01">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="availableDays">Available Days</label>
+                        <input type="text" id="availableDays" name="available_days" placeholder="Mon, Tue, Wed...">
+                    </div>
+
+                </div>
+
+                <div class="form-actions">
+                    <button type="button" class="btn btn-secondary" onclick="closeModal('doctorModal')">
+                        Cancel
+                    </button>
+                    <button type="submit" class="btn btn-primary">
+                        Save Doctor
+                    </button>
+                </div>
+
+            </form>
+
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            loadDoctors();
+        });
+    </script>
+
+</body>
+</html>
